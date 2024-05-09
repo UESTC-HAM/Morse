@@ -1,6 +1,6 @@
 <template>
   <v-card class="my-2">
-    <v-expansion-panels>
+    <v-expansion-panels :value="0">
       <v-expansion-panel>
         <v-expansion-panel-header>
           <v-card-title>嘤频配置</v-card-title>
@@ -52,12 +52,12 @@ export default {
     sound: false,
   }),
   watch: {
-    freq: (freq) => {
-      localStorage.setItem("freq", freq);
+    freq: function(val){
+      localStorage.setItem("freq", val);
     },
-    holdtime: (holdtime) => {
-      localStorage.setItem("holdtimeLower", holdtime[0]);
-      localStorage.setItem("holdtimeUpper", holdtime[1]);
+    holdtime: function(val){
+      localStorage.setItem("holdtimeLower", val[0]);
+      localStorage.setItem("holdtimeUpper", val[1]);
     },
   },
   methods: {
@@ -135,10 +135,10 @@ export default {
     },
   },
   mounted: function () {
-    this.freq = localStorage.getItem("freq");
+    this.freq = localStorage.getItem("freq") || this.freq;
     this.holdtime = [
-      parseInt(localStorage.getItem("holdtimeLower")),
-      parseInt(localStorage.getItem("holdtimeUpper")),
+      parseInt(localStorage.getItem("holdtimeLower") || this.holdtime[0]),
+      parseInt(localStorage.getItem("holdtimeUpper") || this.holdtime[1]),
     ];
 
     this.Bus.$on("initAudio", () => {

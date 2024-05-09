@@ -11,7 +11,7 @@
     <v-main>
       <v-container>
         <StartMorse />
-        <Echo />
+        <EchoOutput />
         <MorseBtn />
         <MorseExec />
       </v-container>
@@ -29,7 +29,7 @@
 import StartMorse from "./components/StartMorse";
 import MorseExec from "./components/MorseExec";
 import MorseBtn from "./components/MorseBtn";
-import Echo from "./components/Echo";
+import EchoOutput from "./components/EchoOutput";
 
 export default {
   name: "App",
@@ -38,7 +38,7 @@ export default {
     StartMorse,
     MorseExec,
     MorseBtn,
-    Echo,
+    EchoOutput,
   },
   methods: {
     toggleTheme: function () {
