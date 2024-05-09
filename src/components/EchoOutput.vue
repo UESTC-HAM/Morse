@@ -2,7 +2,9 @@
   <v-card>
     <v-card-title>
       输出结果
-      <v-icon @click="clearData">mdi-delete</v-icon>
+      <v-icon class="ms-4" @click="clearData">mdi-delete</v-icon>
+      <v-icon class="ms-4" @click="stopAudio">mdi-stop</v-icon>
+      <v-icon class="ms-4" @click="repeatData">mdi-restart</v-icon>
     </v-card-title>
     <v-card-text class="morse">
       <ruby v-for="(txt, idx) in translated" :key="idx">
@@ -27,6 +29,16 @@ export default {
     clearData: function () {
       this.buffer = this.buffer.slice(0, 0);
       this.translated = this.translated.slice(0, 0);
+    },
+    repeatData: function () {
+      const tmp = this.translated
+      this.clearData()
+      tmp.forEach(c => {
+        this.Bus.$emit("keyBatchPress", c.text);
+      });
+    },
+    stopAudio: function () {
+      this.Bus.$emit("stopAudio");
     },
     translateBuffer: function () {
       let joined = this.buffer.join("");

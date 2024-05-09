@@ -23,13 +23,13 @@
     <v-card-actions v-if="btnMode == '3btn'" v-hotkey="keymap3btn">
       <v-row no-gutters>
         <v-col cols="12" md="4">
-          <v-btn tile block @click="doBeep('.')">Short ( . )</v-btn>
+          <v-btn tile block @click="doBeep('.')">Short ( . ) [键盘 z]</v-btn>
         </v-col>
         <v-col cols="12" md="4">
-          <v-btn tile block @click="doBeep('-')">Long ( - )</v-btn>
+          <v-btn tile block @click="doBeep('-')">Long ( - ) [键盘 x]</v-btn>
         </v-col>
         <v-col cols="12" md="4">
-          <v-btn tile block @click="doBeep(' ')">Space ( )</v-btn>
+          <v-btn tile block @click="doBeep(' ')">Space ( _ ) / 结束字符 [键盘空格]</v-btn>
         </v-col>
       </v-row>
     </v-card-actions>
@@ -40,7 +40,7 @@
         v-long-press="150"
         @long-press-stop="doBtnBeep('.')"
         @long-press-start="doBtnBeep('-')"
-        >Send</v-btn
+      >Send (长/短) [键盘空格]</v-btn
       >
     </v-card-actions>
   </v-card>

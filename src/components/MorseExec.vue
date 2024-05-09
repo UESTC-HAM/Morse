@@ -1,6 +1,6 @@
 <template>
   <v-card class="my-2">
-    <v-expansion-panels :value="0">
+    <v-expansion-panels>
       <v-expansion-panel>
         <v-expansion-panel-header>
           <v-card-title>嘤频配置</v-card-title>
@@ -52,10 +52,10 @@ export default {
     sound: false,
   }),
   watch: {
-    freq: function(val){
+    freq: function (val) {
       localStorage.setItem("freq", val);
     },
-    holdtime: function(val){
+    holdtime: function (val) {
       localStorage.setItem("holdtimeLower", val[0]);
       localStorage.setItem("holdtimeUpper", val[1]);
     },
@@ -97,9 +97,12 @@ export default {
               this.sound = false;
             }, length + 100);
           } else {
-            setTimeout(() => {
-              this.sound = false;
-            }, length + this.holdtime[0] + 100);
+            setTimeout(
+              () => {
+                this.sound = false;
+              },
+              length + this.holdtime[0] + 100
+            );
           }
         }
       }
@@ -143,6 +146,10 @@ export default {
 
     this.Bus.$on("initAudio", () => {
       this.init();
+    });
+
+    this.Bus.$on("stopAudio", () => {
+      this.queue = [];
     });
 
     this.Bus.$on("keyPress", (key) => {
